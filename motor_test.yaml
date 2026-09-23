@@ -1,0 +1,10 @@
+rmcs_executor:
+  ros__parameters:
+    update_rate: 1000.0
+    components:
+      - rmcs_core::hardware::MotorTest -> motor_test_hardware
+
+motor_test_hardware:
+  ros__parameters:
+    board_serial: ""
+
