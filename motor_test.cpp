@@ -33,7 +33,7 @@ public:
         , dr16_{}
         , velocity_filter_{10.0, 100.0} {
 
-        // 配置GM6020电机：类型GM6020，ID=1，减速比1:1，多圈角度
+        // 配置M3508电机：类型kM3508，ID=3，使用库默认减速比，多圈角度
         motor_.configure(
             device::DjiMotor::Config{device::DjiMotor::Type::kM3508, 3}
                 .enable_multi_turn_angle());
@@ -51,14 +51,14 @@ public:
         speed_pid_.kp = 0.005;
         speed_pid_.ki = 0.0;
         speed_pid_.kd = 0.0;
-        speed_pid_.output_min = -0.05;
+        speed_pid_.output_min = -0.05;   // 速度环扭矩输出限幅±0.05（防止电机飞转）
         speed_pid_.output_max = 0.05;
 
         // 初始化角度环PID
         angle_pid_.kp = 2.0;
         angle_pid_.ki = 0.01;
         angle_pid_.kd = 0.1;
-        angle_pid_.output_min = -20.0;   // 最大速度±3 rad/s
+        angle_pid_.output_min = -20.0;   // 角度环输出速度限幅±20 rad/s
         angle_pid_.output_max = 20.0;
 
 
